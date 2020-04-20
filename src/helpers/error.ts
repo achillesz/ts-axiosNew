@@ -21,7 +21,7 @@ export class AxiosError extends Error {
       this.response = response
       this.isAxiosError = true
 
-      Object.setPrototypeOf(this, AxiosError.prototype)
+      Object.setPrototypeOf(this, AxiosError.prototype) // 修复一个坑
     }
 }
 

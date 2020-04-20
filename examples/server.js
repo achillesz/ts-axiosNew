@@ -75,7 +75,73 @@ router.get('/error/timeout', function(req, res) {
 
 })
 
+
+registerExtendRouter()
+
+registerInterceptorRouter()
+
+registerConfigRouter()
+
+
+function registerInterceptorRouter() {
+  router.get('/interceptor/get', function(req, res) {
+    res.end('hello')
+  })
+}
+
+
+
+
+function registerExtendRouter() {
+  router.get('/extend/get', function(req, res) {
+    res.json({
+      msg: `hello world`
+    })
+  })
+
+  router.options('/extend/options', function(req, res) {
+    res.end()
+  })
+
+  router.delete('/extend/delete', function(req, res) {
+    res.end()
+  })
+
+  router.head('/extend/head', function(req, res) {
+    res.end()
+  })
+
+  router.post('/extend/post', function(req, res) {
+    res.json(req.body)
+  })
+
+  router.put('/extend/put', function(req, res) {
+    res.json(req.body)
+  })
+
+  router.patch('/extend/patch', function(req, res) {
+    res.json(req.body)
+  })
+
+  router.get('/extend/user', function(req, res) {
+    res.json({
+      code: 0,
+      message: 'ok',
+      result: {
+        name: 'jack',
+        age: 18
+      }
+    })
+  })
+}
+
 const port = process.env.PORT || 8080
 module.exports = app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`)
 })
+
+function registerConfigRouter() {
+  router.post('/config/post', function(req, res) {
+    res.json(req.body)
+  })
+}
