@@ -82,15 +82,13 @@ registerInterceptorRouter()
 
 registerConfigRouter()
 
+registerCancelRouter()
 
 function registerInterceptorRouter() {
   router.get('/interceptor/get', function(req, res) {
     res.end('hello')
   })
 }
-
-
-
 
 function registerExtendRouter() {
   router.get('/extend/get', function(req, res) {
@@ -135,13 +133,29 @@ function registerExtendRouter() {
   })
 }
 
-const port = process.env.PORT || 8080
-module.exports = app.listen(port, () => {
-  console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`)
-})
-
 function registerConfigRouter() {
   router.post('/config/post', function(req, res) {
     res.json(req.body)
   })
 }
+
+function registerCancelRouter() {
+  router.get('/cancel/get', function(req, res) {
+    setTimeout(() => {
+      res.json('hello')
+    }, 1000)
+  })
+
+  router.post('/cancel/post', function(req, res) {
+    setTimeout(() => {
+      res.json(req.body)
+    }, 1000)
+  })
+
+}
+
+
+const port = process.env.PORT || 8080
+module.exports = app.listen(port, () => {
+  console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`)
+})

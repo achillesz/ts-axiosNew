@@ -1,4 +1,33 @@
 import axios from '../../src/index'
+import { Terminal } from 'xterm/lib/xterm'
+
+// window.onload = () => {
+//   var term = new Terminal();
+//   console.log(term, 'term...')
+//   term.open(document.getElementById('terminal'));
+//   // term.on('key', (key, ev) => {
+//   //   console.log(key.charCodeAt(0));
+//   //   if (key.charCodeAt(0) == 13)
+//   //       term.write('\n');
+//   //   term.write(key);
+//   // });
+
+//   term.textarea.onkeypress = function (e) {
+//     console.log(e, 'textarea.onkeypress...')
+//     term.write(String.fromCharCode(e.keyCode));
+//   }
+
+//   term.onKey((e) => {
+//       let key = e.key;
+//        console.log(key, key.charCodeAt(0));
+//       if (key.charCodeAt(0) == 13) {
+//         term.write('\n');
+//         term.write(key);
+//       }
+//   })
+
+//   term.write('Hello from \x1B[1;3;31mxterm.js\x1B[0m $ ')
+// }
 
 // axios({
 //   method: 'get',

@@ -126,5 +126,8 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
+  },
+  "dependencies": {
+    "xterm": "^4.5.0"
   }
 }

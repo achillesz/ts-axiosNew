@@ -4,6 +4,7 @@ import dispatchRequest from './dispatchRequest'
 import InterceptorManager from './interceptorManager'
 import mergeConfig from "./mergeConfig";
 
+
 interface Interceptors {
   request: InterceptorManager<AxiosRequestConfig>
   response: InterceptorManager<AxiosResponse>
