@@ -11,6 +11,7 @@ export interface AxiosRequestConfig { // 参数类型
   transformRequest?: AxiosTransformer | AxiosTransformer[]
   transformResopnse?: AxiosTransformer | AxiosTransformer[]
   cancelToken?: CancelToken
+  withCredentials?: boolean
   [propName: string]: any
 }
 
