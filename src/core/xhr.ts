@@ -21,7 +21,9 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       xsrfCookieName,
       xsrfHeaderName,
       onDownLoadProgress,
-      onUpLoadProgress
+      onUpLoadProgress,
+      auth,
+      validateStatus
     } = config
 
     const request = new XMLHttpRequest()
@@ -82,9 +84,6 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         reject(createError(`Timeout of ${timeout} ms exceeded`, config, 'ECONNABORTED', request))
       }
 
-
-
-
       if(onDownLoadProgress) {
         request.onprogress = onDownLoadProgress
       }
@@ -111,6 +110,12 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         }
       }
 
+      // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization
+      // https://www.runoob.com/jsref/met-win-btoa.html
+      if(auth) {
+        headers['Authorization'] = 'Basic ' + btoa(auth.username + ':' + auth.password)
+      }
+
 
       Object.keys(headers).forEach(name => {
         if (data === null && name.toLocaleLowerCase() === 'content-type') {
@@ -131,7 +136,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     }
 
     function handleResponse(response: AxiosResponse): void {
-      if(response.status >= 200 && response.status < 300) {
+      // 默认是有的 但用户如果主动设置为空
+      if(!validateStatus || validateStatus(response.status)) {
         resolve(response)
       } else {
         reject(createError(`Request failed with status code ${response.status}`, config, null, request, response))

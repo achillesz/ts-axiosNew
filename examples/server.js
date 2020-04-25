@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const multipart = require('connect-multiparty')
+const atob = require('atob')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
@@ -106,6 +107,26 @@ registerMoreRouter()
 
 registerXsrfRouter()
 
+// auth
+router.post('/auth/post', function(req, res) {
+  const auth = req.headers.authorization
+  const [type, credentials] = auth.split(' ')
+  console.log(atob(credentials))
+  const [username, password]  = atob(credentials).split(':')
+
+  if(type === 'Basic' && username === 'Yee' && password === '123456') {
+    res.json(req.body)
+  } else {
+    res.status(401)
+    res.end('UnAuthorization')
+  }
+})
+
+router.get('/status/304', function(req, res) {
+  res.status(304)
+  res.end()
+})
+
 function registerInterceptorRouter() {
   router.get('/interceptor/get', function(req, res) {
     res.end('hello')
@@ -186,8 +207,11 @@ function registerMoreRouter() {
     console.log(req.body, req.files)
     res.end('upload success!')
   })
+
+
 }
 
+// xsrf
 function registerXsrfRouter() {
   router.get('/xsrf/get', function(req, res) {
     res.json(req.cookies)
