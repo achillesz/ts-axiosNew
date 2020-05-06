@@ -18,6 +18,7 @@ export interface AxiosRequestConfig { // 参数类型
   onUpLoadProgress?: (e: ProgressEvent) => void
   auth?: AxiosBasicCredentials
   validateStatus?: (status: number) => boolean
+  paramsSerializer?: (params: any) => string
   [propName: string]: any
 }
 

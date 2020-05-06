@@ -94,6 +94,10 @@ router.get('/error/timeout', function(req, res) {
 
 })
 
+router.get('/params/get', function(req,res) {
+  res.json(req.body)
+})
+
 
 registerExtendRouter()
 
