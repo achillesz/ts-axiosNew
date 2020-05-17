@@ -98,6 +98,13 @@ router.get('/params/get', function(req,res) {
   res.json(req.body)
 })
 
+router.get('/promiseall/A', function(req, res) {
+  res.end('A')
+})
+router.get('/promiseall/B', function(req, res) {
+  res.end('B')
+})
+
 
 registerExtendRouter()
 
